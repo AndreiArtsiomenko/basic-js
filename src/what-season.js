@@ -15,11 +15,32 @@ const {
  */
 function getSeason(date) {
     if (date == undefined) return 'Unable to determine the time of year!'
-    let month = date.getMonth()
-    if (month >= 0 && month <= 1 || month === 11) return 'winter';
-    if (month >= 2 && month <= 4) return 'spring';
-    if (month >= 5 && month <= 7) return 'summer';
-    if (month >= 8 && month <= 10) return 'autumn';
+    if (date.getTime) {
+        let month = date.getMonth()
+        if (month >= 0 && month <= 1 || month === 11) return 'winter';
+        if (month >= 2 && month <= 4) return 'spring';
+        if (month >= 5 && month <= 7) return 'summer';
+        if (month >= 8 && month <= 10) return 'autumn';
+    } else {
+        throw new Error('Invalid date!')
+    }
+    // try {
+    //     if (isNaN(Date.parse(date))) {
+    //         let month = date.getMonth()
+    //         if (month >= 0 && month <= 1 || month === 11) return 'winter';
+    //         if (month >= 2 && month <= 4) return 'spring';
+    //         if (month >= 5 && month <= 7) return 'summer';
+    //         if (month >= 8 && month <= 10) return 'autumn';
+    //     }
+
+    // } catch (err) {
+    //     if (typeof data === 'undefined') {
+    //         return 'Unable to determine the time of year!';
+    //     } else {
+    //         throw new Error('Invalid date!');
+    //     }
+
+    // }
 }
 
 module.exports = {
