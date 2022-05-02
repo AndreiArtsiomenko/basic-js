@@ -19,21 +19,27 @@ function transform(arr) {
     if (!Array.isArray(arr)) {
         throw new Error("'arr' parameter must be an instance of the Array!")
     }
-    let arrNew = arr.map((item, index, arrays) => {
+
+    let arrNew = arr.slice()
+
+    arrNew.forEach((item, index, arrays) => {
         let n = arr.length - 1;
-        if (item === '--double-next' && index !== n) return item = arrays[index + 1];
-        if (item === '--double-next' && index === n) return ' ';
-        if (item === '--double-prev' && index !== 0) return item = arrays[index - 1];
-        if (item === '--double-prev' && index === 0) return ' ';
 
-        if (item === '--discard-next' && index !== n) return item = arrays[index + 1] = ' ';
-        if (item === '--discard-next' && index === n) return ' ';
-        if (item === '--discard-prev' && index !== 0) return item = arrays[index - 1] = ' ';
-        if (item === '--discard-prev' && index === 0) return ' ';
+        if (item === '--double-next' && index !== n) arrNew.splice(index, 1, arrNew[index + 1]);
+        if (item === '--double-next' && index === n) arrNew.splice(index, 1)
 
-        return item;
+        if (item === '--double-prev' && index !== 0) arrNew.splice(index, 1, arrNew[index - 1]);
+        if (item === '--double-prev' && index === 0) arrNew.splice(index, 1)
+
+
+        if (item === '--discard-next' && index !== n) arrNew.splice(index, 2, '', '');
+        if (item === '--discard-next' && index === n) arrNew.splice(index, 1);
+
+        if (item === '--discard-prev' && index !== 0) arrNew.splice(index - 1, 2);
+        if (item === '--discard-prev' && index === 0) arrNew.splice(index, 1)
+
     })
-    return arrNew.filter(elem => elem !== ' ')
+    return arrNew.filter(elem => elem !== '')
 }
 
 module.exports = {
