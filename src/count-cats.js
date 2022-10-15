@@ -1,5 +1,5 @@
 const {
-    NotImplementedError
+  NotImplementedError
 } = require('../extensions/index.js');
 
 /**
@@ -16,16 +16,12 @@ const {
  * ]) => 3`
  *
  */
+
+
 function countCats(matrix) {
-    let num = 0;
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[i].length; j++) {
-            if (matrix[i][j] === '^^') num++
-        }
-    }
-    return num;
+  return matrix.flat(Infinity).filter(el => el === '^^').length
 }
 
 module.exports = {
-    countCats
+  countCats
 };
