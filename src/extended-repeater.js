@@ -17,8 +17,6 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function repeater(str, options) {
 
-  let result = String(str)
-
   let addSep = options.additionSeparator ? options.additionSeparator : '|'
 
   let sep = options.separator ? options.separator : '+'
@@ -37,16 +35,16 @@ function repeater(str, options) {
     strNew = arr.join(addSep)
   }
 
-  result = result + strNew;
+  str = String(str) + strNew;
 
   if (options.repeatTimes) {
     let arr = []
     for (let i = 0; i < options.repeatTimes; i++) {
-      arr.push(result)
+      arr.push(str)
     }
-    result = arr.join(sep)
+    str = arr.join(sep)
   }
-  return result
+  return str
 }
 
 
